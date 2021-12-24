@@ -42,10 +42,27 @@ class ExtratorURL:
         
         return valor
 
+    def __len__(self):
+        return len(self.url)
+
+    def __str__(self):
+        params = self.get_url_parametros()
+        url_base = self.get_url_base()
+        return f"URL: {self.url}\nParâmetros: {params}\nURL base: {url_base}"
+
+    def __eq__(self, other):
+        return self.url == other.url
+
 
 if __name__ == "__main__":
     # url = None or ""
     url = "bytebank.com/cambio?moedaDestino=dolar&moedaOrigem=real&quantidade=100"
     ext = ExtratorURL(url)
+    ext2 = ExtratorURL(url)
     valor_quantidade = ext.get_valor_parametro('quantidade')
     print(valor_quantidade)
+    print(f"O tamanho da URL: {len(url)}")
+    print(ext)
+    print(ext == ext2)
+    print(f"End Memoria EXT : {id(ext)}")
+    print(f"End Memoria EXT2: {id(ext2)}")
